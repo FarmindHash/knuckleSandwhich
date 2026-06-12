@@ -6,6 +6,11 @@ public class PlayerHealth : MonoBehaviour
 
     private float currentHealth;
 
+    public bool dodgeLeft = false;
+    public bool dodgeRight = false;
+    public bool dodgeForward = false;
+    public bool dodgeBack = false;
+
     void Start()
     {
         currentHealth = maxHealth;

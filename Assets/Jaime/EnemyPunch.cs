@@ -7,6 +7,7 @@ public class EnemyPunch : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerHealth player = other.GetComponent<PlayerHealth>();
+        // Draw a raycast or something to detect wether it hit the glove as well. - dan
 
         if (player != null)
         {
