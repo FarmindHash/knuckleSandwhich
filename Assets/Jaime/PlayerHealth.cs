@@ -11,6 +11,11 @@ public class PlayerHealth : MonoBehaviour
     public bool dodgeForward = false;
     public bool dodgeBack = false;
 
+    public bool attackLeft = false;
+    public bool attackRight = false;
+    public bool attackForward = false;
+    public bool attackBack = false;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -18,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        damage = CalculateDamage(damage);
         currentHealth -= damage;
 
         Debug.Log("Player took damage: " + damage);
@@ -31,5 +37,27 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player Knocked Out");
+    }
+
+    float CalculateDamage(float damage)
+    {
+        float modifier = 1f;
+
+        if (FailDodge())
+        {
+            modifier = 2f;
+        }
+
+        damage *= modifier;
+        return damage;
+    }
+
+    bool FailDodge()
+    {
+        if ((dodgeLeft && attackLeft) || (dodgeRight && attackRight) || (dodgeForward && attackForward) || (dodgeBack && attackBack))
+        {
+            return true;
+        }
+        return false;
     }
 }

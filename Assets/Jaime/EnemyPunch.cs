@@ -11,6 +11,7 @@ public class EnemyPunch : MonoBehaviour
 
         if (player != null)
         {
+            //enable the correct boolean here
             player.TakeDamage(damage);
         }
     }
