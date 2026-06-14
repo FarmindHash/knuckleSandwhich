@@ -6,6 +6,8 @@ public class PlayerGlove : MonoBehaviour
 
     private Vector3 lastPosition;
 
+    public bool isBlocking = false;
+
     void Start()
     {
         lastPosition = transform.position;

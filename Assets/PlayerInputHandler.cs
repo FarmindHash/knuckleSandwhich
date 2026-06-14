@@ -5,7 +5,11 @@ public class PlayerInputHandler : MonoBehaviour
 {
 
     public InputActionReference DodgeActionReference;
+    public InputActionReference LeftBlockReference;
+    public InputActionReference RightBlockReference;
     public PlayerHealth playerHealth;
+    public PlayerGlove playerLeftGlove;
+    public PlayerGlove PlayerRightGlove;
 
     public Transform dodgeVisualiser;
     private Vector3 relativeDodgeVisual;
@@ -13,10 +17,14 @@ public class PlayerInputHandler : MonoBehaviour
     float xDodge;
     float yDodge;
     InputAction DodgeAction;
+    InputAction LeftBlock;
+    InputAction RightBlock;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         DodgeAction = DodgeActionReference;
+        LeftBlock = LeftBlockReference;
+        RightBlock = RightBlockReference;
         relativeDodgeVisual = dodgeVisualiser.localPosition;
     }
 
@@ -35,9 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
         Vector3 targetPosition = relativeDodgeVisual;
         targetPosition.x = relativeDodgeVisual.x + (xDodge / 10);
         targetPosition.z = relativeDodgeVisual.z + (yDodge / 10);
-        Debug.Log("Target Position: " + targetPosition);
-        Debug.Log("RElative visual" + relativeDodgeVisual);
-        Debug.Log("Input: " + DodgeAction.ReadValue<Vector2>());
+
         if (xDodge > 0.01f)
         {
             playerHealth.dodgeRight = true;
@@ -77,5 +83,10 @@ public class PlayerInputHandler : MonoBehaviour
         Debug.Log("Dodge status forward: " + playerHealth.dodgeForward);
         Debug.Log("Dodge status back: " + playerHealth.dodgeBack);
         */
+    }
+
+    void CheckBlock()
+    {
+        LeftBlock.ReadValue<float>(); // set up input
     }
 }
