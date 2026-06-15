@@ -35,6 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
         yDodge = DodgeAction.ReadValue<Vector2>().y;
 
         CheckDodge();
+        CheckBlock();
     }
 
     void CheckDodge()
@@ -87,6 +88,24 @@ public class PlayerInputHandler : MonoBehaviour
 
     void CheckBlock()
     {
-        LeftBlock.ReadValue<float>(); // set up input
+        if (LeftBlock.IsPressed())
+        {
+            Debug.Log("BLOCKING WITH LEFT HAND!");
+            playerLeftGlove.isBlocking = true;
+        }
+        else
+        {
+            playerLeftGlove.isBlocking = false;
+        }
+
+        if (RightBlock.IsPressed())
+        {
+            Debug.Log("BLOCKING WITH RIGHT HAND!");
+            PlayerRightGlove.isBlocking = true;
+        }
+        else
+        {
+            PlayerRightGlove.isBlocking = false;
+        }
     }
 }
