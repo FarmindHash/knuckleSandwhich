@@ -7,6 +7,16 @@ public class PlayerInputHandler : MonoBehaviour
     public InputActionReference DodgeActionReference;
     public InputActionReference LeftBlockReference;
     public InputActionReference RightBlockReference;
+    public InputActionReference LeftAudioReference;
+    public InputActionReference RightAudioReference;
+
+    InputAction LeftAudio;
+    InputAction RightAudio;
+    InputAction DodgeAction;
+    InputAction LeftBlock;
+    InputAction RightBlock;
+
+
     public PlayerHealth playerHealth;
     public PlayerGlove playerLeftGlove;
     public PlayerGlove PlayerRightGlove;
@@ -14,17 +24,20 @@ public class PlayerInputHandler : MonoBehaviour
     public Transform dodgeVisualiser;
     private Vector3 relativeDodgeVisual;
 
+    public AudioSource leftSource;
+    public AudioSource rightSource;
+
     float xDodge;
     float yDodge;
-    InputAction DodgeAction;
-    InputAction LeftBlock;
-    InputAction RightBlock;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         DodgeAction = DodgeActionReference;
         LeftBlock = LeftBlockReference;
         RightBlock = RightBlockReference;
+        LeftAudio = LeftAudioReference;
+        RightAudio = RightAudioReference;
         relativeDodgeVisual = dodgeVisualiser.localPosition;
     }
 
@@ -36,6 +49,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         CheckDodge();
         CheckBlock();
+        DebugPunchSound();
     }
 
     void CheckDodge()
@@ -106,6 +120,18 @@ public class PlayerInputHandler : MonoBehaviour
         else
         {
             PlayerRightGlove.isBlocking = false;
+        }
+    }
+
+    void DebugPunchSound()
+    {
+        if (LeftAudio.WasPressedThisFrame())
+        {
+            leftSource.Play();
+        }
+        else if (RightAudio.WasPressedThisFrame()) 
+        {
+            rightSource.Play();
         }
     }
 }
